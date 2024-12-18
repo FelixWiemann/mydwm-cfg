@@ -25,6 +25,7 @@ prepare() {
   if [[ -f "$srcdir/../config.h" ]]; then
     cp -fv "$srcdir/../config.h" config.h
   fi
+  cp .xinitrc ~/.xinitrc
 }
 
 build() {
