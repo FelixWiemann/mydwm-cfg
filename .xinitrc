@@ -3,6 +3,7 @@ dateformat="%H:%M %d.%m.%Y"
 date="$(date +'%H:%M %d.%m.%y')"
 player=" - "
 noOfPackagesToUpdate=""
+vol="$(amixer get Master | grep -i % | awk '/off/{print("🔇")}/on\]/{print("🔊" $5)}' | sort -u)"
 
 center() {
   termwidth=$1
@@ -26,9 +27,10 @@ metrics() {
 while true; do 
   (( 10#$(date +%s) % 30 )) || date=$(date +'%H:%M %d.%m.%y')
   (( 10#$(date +%s) % 10 )) || player="$(playerctl -a metadata artist) - $(playerctl -a metadata title)"
+  vol="$(amixer get Master | grep -i % | awk '/off/{print("🔇")}/on\]/{print("🔊" $5)}' | sort -u)"
   (( 10#$(date +%s) % 10 )) || noOfPackagesToUpdate="$(pacman -S -u -p --print-format %n| wc -l)"
-  xsetroot -name "| $(center "60" "$player") | $(center "20" "$(metrics)") | $(center "15" "$date") |";
-  sleep 1;
+  xsetroot -name "| $(center "60" "$player") | $(center "10" "$vol") | $(center "20" "$(metrics)") | $(center "15" "$date") |";
+  sleep 0.2;
 
   # $(center "12" "updates: $noOfPackagesToUpdate") 
 done &
