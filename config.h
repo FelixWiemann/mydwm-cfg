@@ -3,6 +3,7 @@
 // requires amixer, playerctl
 static int mute = 0;
 static void togglemute(const Arg *arg);
+static int refreshrate = 120;
 
 /* See LICENSE file for copyright and license details. */
 /* appearance */
