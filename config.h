@@ -3,7 +3,9 @@
 // requires amixer, playerctl
 static int mute = 0;
 static void togglemute(const Arg *arg);
+static void toggleplay(const Arg *arg);
 static int refreshrate = 120;
+static int playing = 0;
 
 /* See LICENSE file for copyright and license details. */
 /* appearance */
@@ -95,7 +97,6 @@ static const char *screenshot[]  = { "flameshot", "gui", NULL };
 static const char *incvol[] = {"amixer", "set", "Master", "5%+", NULL};
 static const char *decvol[] = {"amixer", "set", "Master", "5%-", NULL};
 
-
 static const Key keys[] = {
 	/* modifier                     key        					function        argument */
 	{ MODKEY,                       XK_p,      					spawn,          {.v = dmenucmd } },
@@ -122,8 +123,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_comma,  					tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, 					tagmon,         {.i = +1 } },
 	{ 0,             				XF86XK_AudioMute, 			togglemute,     {0} },
-	{ 0,             				XF86XK_AudioPause, 			spawn,   		{.v = pausemusic} },
-	{ 0,             				XF86XK_AudioPause, 			spawn,   		{.v = playmusic} },
+	{ 0,             				XF86XK_AudioPlay, 			toggleplay,   	{0} },
 	{ 0,             				XF86XK_AudioNext, 			spawn,   		{.v = playnextmusic} },
 	{ 0,             				XF86XK_AudioPrev, 			spawn,   		{.v = playpreviousmusic} },
 	{ 0,							XF86XK_AudioLowerVolume,	spawn,			{.v = decvol} },	
@@ -171,3 +171,17 @@ togglemute(const Arg *a)
 		spawn(&arg );
 	}
 }
+
+void
+toggleplay(const Arg *a)
+{ 	
+	playing = !playing;
+	if (playing) {
+		Arg arg = {.v = playmusic};
+		spawn(&arg );
+	} else {
+		Arg arg = {.v = pausemusic};
+		spawn(&arg );
+	}
+}
+
