@@ -53,6 +53,7 @@ static const Rule rules[] = {
 	{ "heroic",   				NULL,		NULL,		1 << 2,			0,           -1 },
 	{ "epicgameslauncher.exe", 	NULL,		NULL,		1 << 2,			0,           -1 },
 	{ "Signal",   				NULL,		NULL,		1 << 3,			0,           -1 },
+	{ "signal",   				NULL,		NULL,		1 << 3,			0,           -1 },
 	{ "TeamSpeak 3",   			NULL,		NULL,		1 << 3,			0,           -1 },
 	{ "thunderbird",  			NULL,		NULL,		1 << 8,			0,           -1 },
 	{ "org.mozilla.Thunderbird",  			NULL,		NULL,		1 << 8,			0,           -1 },
