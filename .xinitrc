@@ -19,7 +19,7 @@ center() {
 }
 
 metrics() {
-  cpupercent=$(top -bn1 | grep '%Cpu' | tail -1 | grep -P '(....|...) id,'| awk '{print ($8/16)}')
+  cpupercent=$(top -bn1 | grep '%Cpu' | tail -1 | awk '{print $2}')
   ramfree=$(free -m | grep -i mem  | awk '{print ($3/$2)*100}')
   printf "%s" "CPU ${cpupercent:0:3}%, RAM ${ramfree:0:2}%"
 }
